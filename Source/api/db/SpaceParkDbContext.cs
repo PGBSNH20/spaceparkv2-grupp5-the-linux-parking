@@ -5,7 +5,7 @@ namespace api.db
 {
     public class SpaceParkDbContext : DbContext
     {
-        private readonly string connectionString = "host=localhost;port=5432;database=linuxpark;user id=admin;password=secret";
+        private readonly string connectionString = "host=localhost;port=5432;database=linuxpark;user id=root;password=secret";
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseNpgsql(connectionString);
@@ -13,7 +13,8 @@ namespace api.db
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
+            builder.Entity<Ship>().HasData(new Ship { ID = 1, Name = "Ship 1", Plate = "ABC123" });
+            builder.Entity<Spot>().HasData(new Spot { ID = 1, Size = 100, Price = 25 });
         }
     }
 }
