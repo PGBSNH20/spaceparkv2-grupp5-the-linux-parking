@@ -1,23 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using api.DB.Context;
-using api.DB.Repositories;
-using api.Domain.Repositories;
-using api.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using LinuxParking.Database.Context;
+using LinuxParking.Domain.Repositories;
+using LinuxParking.Domain.Services;
+using LinuxParking.Database.Repositories;
 
-namespace api
+namespace LinuxParking.API
 {
     public class Startup
     {
@@ -31,7 +24,7 @@ namespace api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(opts => opts.UseNpgsql("host=localhost;port=5432;database=linuxpark;user id=root;password=secret"));
+            services.AddDbContext<AppDbContext>(opts => opts.UseNpgsql(Configuration.GetConnectionString("Default")));
 
             services.AddScoped<IStationRepository, StationRepository>();
             services.AddScoped<IStationService, StationService>();
@@ -39,7 +32,7 @@ namespace api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LinuxParking.API", Version = "v1" });
             });
         }
 
@@ -50,7 +43,7 @@ namespace api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LinuxParking.API v1"));
             }
 
             app.UseHttpsRedirection();

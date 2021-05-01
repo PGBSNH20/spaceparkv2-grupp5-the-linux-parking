@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using api.Domain.Models;
-namespace api.DB.Context
+using LinuxParking.Domain.Models;
+namespace LinuxParking.Database.Context
 {
     public class AppDbContext : DbContext
     {

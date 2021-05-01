@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using api.Domain.Models;
-using api.Domain.Repositories;
+using LinuxParking.Domain.Models;
+using LinuxParking.Domain.Repositories;
+using LinuxParking.Domain.Services;
 
-namespace api.Domain.Services
+namespace LinuxParking.Domain.Services
 {
   public class StationService : IStationService
   {
