@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using api.Domain.Models;
+using LinuxParking.Domain.Models;
 
-namespace api.Domain.Repositories
+namespace LinuxParking.Domain.Services
 {
-    public interface IStationRepository
+    public interface IStationService
     {
          Task<IEnumerable<Station>> ListAllAsync();
     }

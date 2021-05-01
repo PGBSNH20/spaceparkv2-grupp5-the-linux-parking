@@ -1,4 +1,4 @@
-namespace api.Domain.Models
+namespace LinuxParking.Domain.Models
 {
     public class Station
     {
