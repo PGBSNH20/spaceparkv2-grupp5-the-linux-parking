@@ -2,10 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.DB.Context;
+using api.DB.Repositories;
+using api.Domain.Repositories;
+using api.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +31,10 @@ namespace api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppDbContext>(opts => opts.UseNpgsql("host=localhost;port=5432;database=linuxpark;user id=root;password=secret"));
+
+            services.AddScoped<IStationRepository, StationRepository>();
+            services.AddScoped<IStationService, StationService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
