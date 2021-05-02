@@ -18,32 +18,53 @@ namespace LinuxParking.Domain.Services
         _stationRepository = stationRepository;
         _unitOfWork = unitOfWork;
     }
+
+    public async Task<StationResponse> DeleteAsync(int id)
+    {
+      var existing = await _stationRepository.FindByIdAsync(id);
+
+      if (existing == null)
+        return new StationResponse($"Station with {id} not found.");
+
+      try
+      {
+          _stationRepository.Delete(existing);
+          _unitOfWork.CompleteAsync();
+
+          return new StationResponse(existing);
+      }
+      catch (Exception ex)
+      {
+          return new StationResponse($"Error - Failed to delete station {id}: {ex.Message}");
+      }
+    }
+
     public async Task<IEnumerable<Station>> ListAllAsync()
     {
       return await _stationRepository.ListAllAsync();
     }
 
-    public async Task<CreateStationResponse> SaveAsync(Station station)
+    public async Task<StationResponse> SaveAsync(Station station)
     {
       try
       {
           await _stationRepository.AddAsync(station);
           await _unitOfWork.CompleteAsync();
 
-          return new CreateStationResponse(station);
+          return new StationResponse(station);
       }
       catch (Exception ex)
       {
-        return new CreateStationResponse($"Error - Failed to save station: {ex.Message}");
+        return new StationResponse($"Error - Failed to save station: {ex.Message}");
       }
     }
 
-    public async Task<CreateStationResponse> UpdateAsync(int id, Station station)
+    public async Task<StationResponse> UpdateAsync(int id, Station station)
     {
       var existing = await _stationRepository.FindByIdAsync(id);
 
       if (existing == null)
-        return new CreateStationResponse($"Station with {id} not found.");
+        return new StationResponse($"Station with {id} not found.");
 
       existing.Name = station.Name;
 
@@ -52,11 +73,11 @@ namespace LinuxParking.Domain.Services
           _stationRepository.Update(existing);
           await _unitOfWork.CompleteAsync();
 
-          return new CreateStationResponse(existing);
+          return new StationResponse(existing);
       }
       catch (Exception ex)
       {
-        return new CreateStationResponse($"Failed to update station: {id}, with error: ${ex.Message}");
+        return new StationResponse($"Failed to update station: {id}, with error: ${ex.Message}");
       }
     }
   }
