@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LinuxParking.Domain.Services;
 using LinuxParking.API.Resources;
+using LinuxParking.API.Extentions;
 using LinuxParking.Domain.Models;
 namespace LinuxParking.API.Controllers
 {
@@ -19,6 +20,15 @@ namespace LinuxParking.API.Controllers
         {
             _stationService = stationService;
             _mapper = mapper;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateStationResource resource) {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            //var station = _mapper.Map<CreateStationResource, Station>(resource);
+            return BadRequest();
         }
 
         [HttpGet]

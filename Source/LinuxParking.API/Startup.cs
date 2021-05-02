@@ -47,7 +47,8 @@ namespace LinuxParking.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LinuxParking.API v1"));
             }
 
-            app.UseHttpsRedirection();
+            if (env.IsProduction())
+                app.UseHttpsRedirection();
 
             app.UseRouting();
 
