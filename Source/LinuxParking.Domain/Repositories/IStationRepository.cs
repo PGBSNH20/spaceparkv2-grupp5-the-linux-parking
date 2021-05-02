@@ -11,5 +11,6 @@ namespace LinuxParking.Domain.Repositories
          Task AddAsync(Station station);
          Task<Station> FindByIdAsync(int id);
          void Update(Station station);
+         void Delete(Station station);
     }
 }

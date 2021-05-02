@@ -60,5 +60,17 @@ namespace LinuxParking.API.Controllers
             var stationResponse = _mapper.Map<Station, StationResource>(res.Station);
             return Ok(stationResponse);
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] int id) {
+            var res = await _stationService.DeleteAsync(id);
+
+            if (!res.Success)
+                return BadRequest(res.Message);
+
+            var stationResource = _mapper.Map<Station, StationResource>(res.Station);
+            return Ok(stationResource);
+        }
     }
 }
