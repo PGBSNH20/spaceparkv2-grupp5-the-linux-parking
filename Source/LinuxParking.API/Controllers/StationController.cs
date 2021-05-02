@@ -43,5 +43,22 @@ namespace LinuxParking.API.Controllers
             var stations = await _stationService.ListAllAsync();
             return _mapper.Map<IEnumerable<Station>, IEnumerable<StationResource>>(stations);
         }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateAsync(int id, [FromBody] CreateStationResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var station = _mapper.Map<CreateStationResource, Station>(resource);
+            var res = await _stationService.UpdateAsync(id, station);
+
+            if (!res.Success)
+                return BadRequest(res.Message);
+
+            var stationResponse = _mapper.Map<Station, StationResource>(res.Station);
+            return Ok(stationResponse);
+        }
     }
 }

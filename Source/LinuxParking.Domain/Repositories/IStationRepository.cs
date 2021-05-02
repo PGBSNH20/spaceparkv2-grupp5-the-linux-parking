@@ -9,5 +9,7 @@ namespace LinuxParking.Domain.Repositories
          Task<IEnumerable<Station>> ListAllAsync();
 
          Task AddAsync(Station station);
+         Task<Station> FindByIdAsync(int id);
+         void Update(Station station);
     }
 }

@@ -37,5 +37,27 @@ namespace LinuxParking.Domain.Services
         return new CreateStationResponse($"Error - Failed to save station: {ex.Message}");
       }
     }
+
+    public async Task<CreateStationResponse> UpdateAsync(int id, Station station)
+    {
+      var existing = await _stationRepository.FindByIdAsync(id);
+
+      if (existing == null)
+        return new CreateStationResponse($"Station with {id} not found.");
+
+      existing.Name = station.Name;
+
+      try
+      {
+          _stationRepository.Update(existing);
+          await _unitOfWork.CompleteAsync();
+
+          return new CreateStationResponse(existing);
+      }
+      catch (Exception ex)
+      {
+        return new CreateStationResponse($"Failed to update station: {id}, with error: ${ex.Message}");
+      }
+    }
   }
 }
