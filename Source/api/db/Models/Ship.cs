@@ -14,7 +14,7 @@ namespace api.db.Models
         public int CustomerID { get; set; }
         public int Length { get; set; }
 
-        /*[ForeignKey("CustomerID")]
-        public virtual Customer Customer { get; set; }*/
+        [ForeignKey("CustomerID")]
+        public virtual Customer Customer { get; set; }
     }
 }
