@@ -24,7 +24,7 @@ namespace LinuxParking.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateStationResource resource) {
+        public async Task<IActionResult> CreateAsync([FromBody] CreateStationResource resource) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
