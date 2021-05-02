@@ -30,6 +30,8 @@ namespace LinuxParking.API
             services.AddScoped<IStationRepository, StationRepository>();
             services.AddScoped<IStationService, StationService>();
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
