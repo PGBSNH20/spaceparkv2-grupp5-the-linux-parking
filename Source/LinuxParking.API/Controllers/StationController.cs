@@ -14,6 +14,7 @@ namespace LinuxParking.API.Controllers
     public class StationController : Controller
     {
         private readonly IStationService _stationService;
+
         private readonly IMapper _mapper;
 
         public StationController(IStationService stationService, IMapper mapper)
@@ -42,6 +43,26 @@ namespace LinuxParking.API.Controllers
         {
             var stations = await _stationService.ListAllAsync();
             return _mapper.Map<IEnumerable<Station>, IEnumerable<StationResource>>(stations);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<StationResource> GetAsync([FromRoute] string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task UpdateAsync([FromRoute] string id, [FromBody] CreateStationResource resource)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task DeleteAsync([FromRoute] string id) {
+            throw new NotImplementedException();
         }
     }
 }
