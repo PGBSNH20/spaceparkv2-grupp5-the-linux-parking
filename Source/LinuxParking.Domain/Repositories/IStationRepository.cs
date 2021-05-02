@@ -6,7 +6,7 @@ namespace LinuxParking.Domain.Repositories
 {
     public interface IStationRepository
     {
-         Task<IEnumerable<Station>> ListAllAsync();
+         Task<IEnumerable<Station>> ListAsync();
 
          Task AddAsync(Station station);
          Task<Station> FindByIdAsync(int id);

@@ -26,7 +26,7 @@ namespace LinuxParking.Database.Repositories
       return await _ctx.Stations.FindAsync(id);
     }
 
-    public async Task<IEnumerable<Station>> ListAllAsync()
+    public async Task<IEnumerable<Station>> ListAsync()
     {
       return await _ctx.Stations.ToListAsync();
     }
