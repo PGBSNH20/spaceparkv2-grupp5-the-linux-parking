@@ -4,10 +4,11 @@ using LinuxParking.API.Domain.Resources;
 
 namespace LinuxParking.API.Mappings
 {
-    public class ModelToResourceMapper : Profile
+  public class ModelToResourceMapper : Profile
+  {
+    public ModelToResourceMapper()
     {
-        public ModelToResourceMapper() {
-            CreateMap<Station, StationResource>();
-        }
+      CreateMap<Station, StationResource>();
     }
+  }
 }

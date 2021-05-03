@@ -9,7 +9,7 @@ namespace LinuxParking.Database.Repositories
 {
   public class StationRepository : BaseRepository, IStationRepository
   {
-    public StationRepository(AppDbContext ctx) : base(ctx) {}
+    public StationRepository(AppDbContext ctx) : base(ctx) { }
 
     public async Task AddAsync(Station station)
     {

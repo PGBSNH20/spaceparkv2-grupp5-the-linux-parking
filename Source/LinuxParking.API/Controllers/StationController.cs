@@ -8,82 +8,85 @@ using LinuxParking.API.Extentions;
 using LinuxParking.API.Domain.Models;
 namespace LinuxParking.API.Controllers
 {
-    [Route("/api/[controller]")]
-    public class StationController : Controller
+  [Route("/api/[controller]")]
+  public class StationController : Controller
+  {
+    private readonly IStationService _stationService;
+
+    private readonly IMapper _mapper;
+
+    public StationController(IStationService stationService, IMapper mapper)
     {
-        private readonly IStationService _stationService;
+      _stationService = stationService;
+      _mapper = mapper;
+    }
 
-        private readonly IMapper _mapper;
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync([FromBody] CreateStationResource resource)
+    {
+      if (!ModelState.IsValid)
+        return BadRequest(ModelState.GetErrorMessages());
 
-        public StationController(IStationService stationService, IMapper mapper)
-        {
-            _stationService = stationService;
-            _mapper = mapper;
-        }
+      var station = _mapper.Map<CreateStationResource, Station>(resource);
+      var res = await _stationService.SaveAsync(station);
 
-        [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody] CreateStationResource resource) {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState.GetErrorMessages());
+      if (!res.Success)
+        return BadRequest(res.Message);
 
-            var station = _mapper.Map<CreateStationResource, Station>(resource);
-            var res = await _stationService.SaveAsync(station);
+      var stationResource = _mapper.Map<Station, StationResource>(res.Station);
+      return Created("", stationResource);
+    }
 
-            if (!res.Success)
-                return BadRequest(res.Message);
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+    {
+      var res = await _stationService.ListAsync();
 
-            var stationResource = _mapper.Map<Station, StationResource>(res.Station);
-            return Created("",stationResource);
-        }
+      if (!res.Success)
+        return BadRequest(res.Message);
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
-        {
-            var res = await _stationService.ListAsync();
+      var stationsResponse = _mapper.Map<IEnumerable<Station>, IEnumerable<StationResource>>(res.Stations);
+      return Ok(stationsResponse);
+    }
 
-            if (!res.Success)
-                return BadRequest(res.Message);
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAsync([FromRoute] int id)
+    {
+      var res = await _stationService.FindByIdAsync(id);
 
-            var stationsResponse = _mapper.Map<IEnumerable<Station>, IEnumerable<StationResource>>(res.Stations);
-            return Ok(stationsResponse);
-        }
+      if (!res.Success)
+        return BadRequest(res.Message);
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync([FromRoute] int id){
-            var res = await _stationService.FindByIdAsync(id);
+      var stationResponse = _mapper.Map<Station, StationResource>(res.Station);
+      return Ok(stationResponse);
+    }
 
-            if (!res.Success)
-                return BadRequest(res.Message);
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAsync(int id, [FromBody] CreateStationResource resource)
+    {
+      if (!ModelState.IsValid)
+        return BadRequest(ModelState.GetErrorMessages());
 
-            var stationResponse = _mapper.Map<Station, StationResource>(res.Station);
-            return Ok(stationResponse);
-        }
+      var station = _mapper.Map<CreateStationResource, Station>(resource);
+      var res = await _stationService.UpdateAsync(id, station);
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(int id, [FromBody] CreateStationResource resource)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState.GetErrorMessages());
+      if (!res.Success)
+        return BadRequest(res.Message);
 
-            var station = _mapper.Map<CreateStationResource, Station>(resource);
-            var res = await _stationService.UpdateAsync(id, station);
+      var stationResponse = _mapper.Map<Station, StationResource>(res.Station);
+      return Ok(stationResponse);
+    }
 
-            if (!res.Success)
-                return BadRequest(res.Message);
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync([FromRoute] int id)
+    {
+      var res = await _stationService.DeleteAsync(id);
 
-            var stationResponse = _mapper.Map<Station, StationResource>(res.Station);
-            return Ok(stationResponse);
-        }
+      if (!res.Success)
+        return BadRequest(res.Message);
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync([FromRoute] int id) {
-            var res = await _stationService.DeleteAsync(id);
-
-            if (!res.Success)
-                return BadRequest(res.Message);
-
-            var stationResource = _mapper.Map<Station, StationResource>(res.Station);
+      var stationResource = _mapper.Map<Station, StationResource>(res.Station);
       return Ok(stationResource);
     }
-    }
+  }
 }

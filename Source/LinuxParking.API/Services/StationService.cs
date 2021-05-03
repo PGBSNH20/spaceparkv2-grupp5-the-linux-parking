@@ -14,8 +14,8 @@ namespace LinuxParking.API.Services
 
     public StationService(IStationRepository stationRepository, IUnitOfWork unitOfWork)
     {
-        _stationRepository = stationRepository;
-        _unitOfWork = unitOfWork;
+      _stationRepository = stationRepository;
+      _unitOfWork = unitOfWork;
     }
 
     public async Task<StationResponse> DeleteAsync(int id)
@@ -27,14 +27,14 @@ namespace LinuxParking.API.Services
 
       try
       {
-          _stationRepository.Delete(existing);
-          await _unitOfWork.CompleteAsync();
+        _stationRepository.Delete(existing);
+        await _unitOfWork.CompleteAsync();
 
-          return new StationResponse(existing);
+        return new StationResponse(existing);
       }
       catch (Exception ex)
       {
-          return new StationResponse($"Error - Failed to delete station {id}: {ex.Message}");
+        return new StationResponse($"Error - Failed to delete station {id}: {ex.Message}");
       }
     }
 
@@ -58,7 +58,7 @@ namespace LinuxParking.API.Services
       }
       catch (Exception ex)
       {
-         return new StationResponse($"Failed to query all stations: {ex.Message}");
+        return new StationResponse($"Failed to query all stations: {ex.Message}");
       }
     }
 
@@ -66,10 +66,10 @@ namespace LinuxParking.API.Services
     {
       try
       {
-          await _stationRepository.AddAsync(station);
-          await _unitOfWork.CompleteAsync();
+        await _stationRepository.AddAsync(station);
+        await _unitOfWork.CompleteAsync();
 
-          return new StationResponse(station);
+        return new StationResponse(station);
       }
       catch (Exception ex)
       {
@@ -88,10 +88,10 @@ namespace LinuxParking.API.Services
 
       try
       {
-          _stationRepository.Update(existing);
-          await _unitOfWork.CompleteAsync();
+        _stationRepository.Update(existing);
+        await _unitOfWork.CompleteAsync();
 
-          return new StationResponse(existing);
+        return new StationResponse(existing);
       }
       catch (Exception ex)
       {
