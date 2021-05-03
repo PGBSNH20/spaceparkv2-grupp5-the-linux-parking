@@ -4,8 +4,8 @@ namespace LinuxParking.Domain.Response
 {
     public class StationResponse : BaseResponse
     {
-        public Station Station { get; private set; }
-        public IEnumerable<Station> Stations { get; private set; }
+        public Station Station { get; }
+        public IEnumerable<Station> Stations { get; }
         private StationResponse(bool success, string message, Station station) : base(success, message)
         {
             Station = station;
