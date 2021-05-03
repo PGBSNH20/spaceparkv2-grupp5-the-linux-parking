@@ -35,34 +35,41 @@ namespace LinuxParking.API.Controllers
                 return BadRequest(res.Message);
 
             var stationResource = _mapper.Map<Station, StationResource>(res.Station);
-            return Ok(stationResource);
+            return Created("",stationResource);
         }
 
         [HttpGet]
         public async Task<IEnumerable<StationResource>> GetAllAsync()
         {
-            var stations = await _stationService.ListAllAsync();
+            var stations = await _stationService.ListAsync();
             return _mapper.Map<IEnumerable<Station>, IEnumerable<StationResource>>(stations);
         }
 
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<StationResource> GetAsync([FromRoute] string id)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAsync(int id, [FromBody] CreateStationResource resource)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var station = _mapper.Map<CreateStationResource, Station>(resource);
+            var res = await _stationService.UpdateAsync(id, station);
+
+            if (!res.Success)
+                return BadRequest(res.Message);
+
+            var stationResponse = _mapper.Map<Station, StationResource>(res.Station);
+            return Ok(stationResponse);
         }
 
-        [HttpPut]
-        [Route("{id}")]
-        public async Task UpdateAsync([FromRoute] string id, [FromBody] CreateStationResource resource)
-        {
-            throw new NotImplementedException();
-        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] int id) {
+            var res = await _stationService.DeleteAsync(id);
 
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task DeleteAsync([FromRoute] string id) {
-            throw new NotImplementedException();
+            if (!res.Success)
+                return BadRequest(res.Message);
+
+            var stationResource = _mapper.Map<Station, StationResource>(res.Station);
+            return Ok(stationResource);
         }
     }
 }

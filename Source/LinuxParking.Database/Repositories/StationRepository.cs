@@ -16,9 +16,24 @@ namespace LinuxParking.Database.Repositories
       await _ctx.Stations.AddAsync(station);
     }
 
-    public async Task<IEnumerable<Station>> ListAllAsync()
+    public void Delete(Station station)
+    {
+      _ctx.Stations.Remove(station);
+    }
+
+    public async Task<Station> FindByIdAsync(int id)
+    {
+      return await _ctx.Stations.FindAsync(id);
+    }
+
+    public async Task<IEnumerable<Station>> ListAsync()
     {
       return await _ctx.Stations.ToListAsync();
+    }
+
+    public void Update(Station station)
+    {
+      _ctx.Stations.Update(station);
     }
   }
 }
