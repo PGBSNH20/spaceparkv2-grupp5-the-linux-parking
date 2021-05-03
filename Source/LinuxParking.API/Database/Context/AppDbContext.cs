@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using LinuxParking.Domain.Models;
+using LinuxParking.API.Domain.Models;
+
 namespace LinuxParking.Database.Context
 {
     public class AppDbContext : DbContext

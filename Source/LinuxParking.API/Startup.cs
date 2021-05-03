@@ -6,8 +6,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using LinuxParking.Database.Context;
-using LinuxParking.Domain.Repositories;
-using LinuxParking.Domain.Services;
+using LinuxParking.API.Domain.Repositories;
+using LinuxParking.API.Services;
+using LinuxParking.API.Domain.Services;
 using LinuxParking.Database.Repositories;
 
 namespace LinuxParking.API

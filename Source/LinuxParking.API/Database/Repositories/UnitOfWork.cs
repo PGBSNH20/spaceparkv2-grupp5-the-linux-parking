@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using LinuxParking.Domain.Repositories;
+using LinuxParking.API.Domain.Repositories;
 using LinuxParking.Database.Context;
 
 namespace LinuxParking.Database.Repositories

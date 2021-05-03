@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LinuxParking.API.Resources
+namespace LinuxParking.API.Domain.Resources
 {
     public class CreateStationResource
     {

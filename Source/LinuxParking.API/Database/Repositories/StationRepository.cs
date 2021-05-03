@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using LinuxParking.Domain.Models;
-using LinuxParking.Domain.Repositories;
+using LinuxParking.API.Domain.Models;
+using LinuxParking.API.Domain.Repositories;
 using LinuxParking.Database.Context;
 
 namespace LinuxParking.Database.Repositories

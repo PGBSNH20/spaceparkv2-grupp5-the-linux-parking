@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LinuxParking.Domain.Models;
-using LinuxParking.Domain.Response;
+using LinuxParking.API.Domain.Models;
+using LinuxParking.API.Domain.Response;
 
-namespace LinuxParking.Domain.Services
+namespace LinuxParking.API.Domain.Services
 {
     public interface IStationService
     {

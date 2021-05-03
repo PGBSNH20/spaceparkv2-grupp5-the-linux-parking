@@ -1,4 +1,4 @@
-namespace LinuxParking.API.Resources
+namespace LinuxParking.API.Domain.Resources
 {
     public class StationResource
     {

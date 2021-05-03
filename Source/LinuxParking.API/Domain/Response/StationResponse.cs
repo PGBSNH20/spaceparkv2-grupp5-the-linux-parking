@@ -1,6 +1,6 @@
-using LinuxParking.Domain.Models;
+using LinuxParking.API.Domain.Models;
 using System.Collections.Generic;
-namespace LinuxParking.Domain.Response
+namespace LinuxParking.API.Domain.Response
 {
     public class StationResponse : BaseResponse
     {

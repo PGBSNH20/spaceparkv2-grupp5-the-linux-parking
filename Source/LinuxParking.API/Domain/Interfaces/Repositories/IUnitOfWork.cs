@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace LinuxParking.Domain.Repositories
+namespace LinuxParking.API.Domain.Repositories
 {
     public interface IUnitOfWork
     {

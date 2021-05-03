@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-namespace LinuxParking.Domain.Models
+namespace LinuxParking.API.Domain.Models
 {
     public class Station
     {

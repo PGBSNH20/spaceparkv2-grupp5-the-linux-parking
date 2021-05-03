@@ -1,4 +1,4 @@
-namespace LinuxParking.Domain.Models
+namespace LinuxParking.API.Domain.Models
 {
   public class Spot
   {

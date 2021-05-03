@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LinuxParking.Domain.Models;
+using LinuxParking.API.Domain.Models;
 
-namespace LinuxParking.Domain.Repositories
+namespace LinuxParking.API.Domain.Repositories
 {
     public interface IStationRepository
     {

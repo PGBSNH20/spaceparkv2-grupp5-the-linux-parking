@@ -1,4 +1,4 @@
-namespace LinuxParking.Domain.Response
+namespace LinuxParking.API.Domain.Response
 {
     public abstract class BaseResponse
     {

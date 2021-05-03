@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinuxParking.API", "LinuxParking.API\LinuxParking.API.csproj", "{EAA25144-580A-410C-AB88-83E189716D1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinuxParking.Domain", "LinuxParking.Domain\LinuxParking.Domain.csproj", "{77B43E85-9647-40C5-8BDB-5F1C2AD0ABDE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinuxParking.Database", "LinuxParking.Database\LinuxParking.Database.csproj", "{FF89C343-7D6D-4EC9-A67F-175D1A251BA6}"
-EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
