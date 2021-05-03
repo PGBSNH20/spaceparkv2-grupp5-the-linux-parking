@@ -10,5 +10,9 @@ namespace LinuxParking.Domain.Response
             Success = success;
             Message = message;
         }
+        public BaseResponse(bool success)
+        {
+            Success = success;
+        }
     }
 }

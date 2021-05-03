@@ -39,10 +39,26 @@ namespace LinuxParking.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<StationResource>> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync()
         {
-            var stations = await _stationService.ListAsync();
-            return _mapper.Map<IEnumerable<Station>, IEnumerable<StationResource>>(stations);
+            var res = await _stationService.ListAsync();
+
+            if (!res.Success)
+                return BadRequest(res.Message);
+
+            var stationsResponse = _mapper.Map<IEnumerable<Station>, IEnumerable<StationResource>>(res.Stations);
+            return Ok(stationsResponse);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAsync([FromRoute] int id){
+            var res = await _stationService.FindByIdAsync(id);
+
+            if (!res.Success)
+                return BadRequest(res.Message);
+
+            var stationResponse = _mapper.Map<Station, StationResource>(res.Station);
+            return Ok(stationResponse);
         }
 
         [HttpPut("{id}")]
@@ -69,7 +85,7 @@ namespace LinuxParking.API.Controllers
                 return BadRequest(res.Message);
 
             var stationResource = _mapper.Map<Station, StationResource>(res.Station);
-            return Ok(stationResource);
-        }
+      return Ok(stationResource);
+    }
     }
 }

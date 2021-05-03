@@ -29,7 +29,7 @@ namespace LinuxParking.Domain.Services
       try
       {
           _stationRepository.Delete(existing);
-          _unitOfWork.CompleteAsync();
+          await _unitOfWork.CompleteAsync();
 
           return new StationResponse(existing);
       }
@@ -39,9 +39,28 @@ namespace LinuxParking.Domain.Services
       }
     }
 
-    public async Task<IEnumerable<Station>> ListAsync()
+    public async Task<StationResponse> FindByIdAsync(int id)
     {
-      return await _stationRepository.ListAsync();
+      var station = await _stationRepository.FindByIdAsync(id);
+
+      if (station == null)
+        return new StationResponse($"Station {id} not found");
+
+      return new StationResponse(station);
+    }
+
+    public async Task<StationResponse> ListAsync()
+    {
+      try
+      {
+        var stations = await _stationRepository.ListAsync();
+
+        return new StationResponse(stations);
+      }
+      catch (Exception ex)
+      {
+         return new StationResponse($"Failed to query all stations: {ex.Message}");
+      }
     }
 
     public async Task<StationResponse> SaveAsync(Station station)
