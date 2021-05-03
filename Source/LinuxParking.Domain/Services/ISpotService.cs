@@ -8,8 +8,8 @@ namespace LinuxParking.Domain.Services
     {
         Task<SpotResponse> ListAsync();
         Task<SpotResponse> FindByIdAsync(int id);
-        Task<SpotResponse> SaveAsync(Spot station);
-        Task<SpotResponse> UpdateAsync(int id, Spot station);
+        Task<SpotResponse> SaveAsync(Spot spot);
+        Task<SpotResponse> UpdateAsync(int id, Spot spot);
         Task<SpotResponse> DeleteAsync(int id);
     }
 }
