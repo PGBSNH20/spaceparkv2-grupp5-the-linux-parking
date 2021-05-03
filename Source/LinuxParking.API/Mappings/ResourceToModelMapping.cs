@@ -1,14 +1,14 @@
 using AutoMapper;
-using LinuxParking.Domain.Models;
-using LinuxParking.API.Resources;
+using LinuxParking.API.Domain.Models;
+using LinuxParking.API.Domain.Resources;
 
 namespace LinuxParking.API.Mappings
 {
-    public class ResourceToModelMapping : Profile
+  public class ResourceToModelMapping : Profile
+  {
+    public ResourceToModelMapping()
     {
-        public ResourceToModelMapping()
-        {
-            CreateMap<CreateStationResource, Station>();
-        }
+      CreateMap<CreateStationResource, Station>();
     }
+  }
 }

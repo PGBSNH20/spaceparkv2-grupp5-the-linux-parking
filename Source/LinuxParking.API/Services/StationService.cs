@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using LinuxParking.Domain.Models;
-using LinuxParking.Domain.Repositories;
-using LinuxParking.Domain.Response;
-using LinuxParking.Domain.Services;
+using LinuxParking.API.Domain.Models;
+using LinuxParking.API.Domain.Repositories;
+using LinuxParking.API.Domain.Response;
+using LinuxParking.API.Domain.Services;
 
-namespace LinuxParking.Domain.Services
+namespace LinuxParking.API.Services
 {
   public class StationService : IStationService
   {
@@ -15,8 +14,8 @@ namespace LinuxParking.Domain.Services
 
     public StationService(IStationRepository stationRepository, IUnitOfWork unitOfWork)
     {
-        _stationRepository = stationRepository;
-        _unitOfWork = unitOfWork;
+      _stationRepository = stationRepository;
+      _unitOfWork = unitOfWork;
     }
 
     public async Task<StationResponse> DeleteAsync(int id)
@@ -28,14 +27,14 @@ namespace LinuxParking.Domain.Services
 
       try
       {
-          _stationRepository.Delete(existing);
-          await _unitOfWork.CompleteAsync();
+        _stationRepository.Delete(existing);
+        await _unitOfWork.CompleteAsync();
 
-          return new StationResponse(existing);
+        return new StationResponse(existing);
       }
       catch (Exception ex)
       {
-          return new StationResponse($"Error - Failed to delete station {id}: {ex.Message}");
+        return new StationResponse($"Error - Failed to delete station {id}: {ex.Message}");
       }
     }
 
@@ -59,7 +58,7 @@ namespace LinuxParking.Domain.Services
       }
       catch (Exception ex)
       {
-         return new StationResponse($"Failed to query all stations: {ex.Message}");
+        return new StationResponse($"Failed to query all stations: {ex.Message}");
       }
     }
 
@@ -67,10 +66,10 @@ namespace LinuxParking.Domain.Services
     {
       try
       {
-          await _stationRepository.AddAsync(station);
-          await _unitOfWork.CompleteAsync();
+        await _stationRepository.AddAsync(station);
+        await _unitOfWork.CompleteAsync();
 
-          return new StationResponse(station);
+        return new StationResponse(station);
       }
       catch (Exception ex)
       {
@@ -89,10 +88,10 @@ namespace LinuxParking.Domain.Services
 
       try
       {
-          _stationRepository.Update(existing);
-          await _unitOfWork.CompleteAsync();
+        _stationRepository.Update(existing);
+        await _unitOfWork.CompleteAsync();
 
-          return new StationResponse(existing);
+        return new StationResponse(existing);
       }
       catch (Exception ex)
       {
