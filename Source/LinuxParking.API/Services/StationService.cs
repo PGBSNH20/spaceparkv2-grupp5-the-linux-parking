@@ -98,5 +98,4 @@ namespace LinuxParking.API.Services
         return new StationResponse($"Failed to update station: {id}, with error: ${ex.Message}");
       }
     }
-  }
 }
