@@ -2,6 +2,8 @@
 using AutoMapper;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using LinuxParking.API.Domain.Services;
 using LinuxParking.API.Extentions;
 using LinuxParking.API.Domain.Resources;
@@ -9,6 +11,7 @@ using LinuxParking.API.Domain.Models;
 namespace LinuxParking.API.Controllers
 {
     [Route("/api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class StationController : Controller
     {
         private readonly IStationService _stationService;
