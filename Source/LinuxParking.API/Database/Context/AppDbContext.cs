@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using LinuxParking.API.Domain.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace LinuxParking.Database.Context
 {
-  public class AppDbContext : DbContext
+  public class AppDbContext : IdentityDbContext
   {
     public DbSet<Station> Stations { get; set; }
     public DbSet<Spot> Spots { get; set; }

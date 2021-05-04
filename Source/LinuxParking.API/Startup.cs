@@ -4,12 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
-using LinuxParking.Database.Context;
-using LinuxParking.API.Domain.Repositories;
-using LinuxParking.API.Services;
-using LinuxParking.API.Domain.Services;
-using LinuxParking.Database.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using LinuxParking.API.Configuration;
 
 namespace LinuxParking.API
 {
@@ -25,14 +22,10 @@ namespace LinuxParking.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(opts => opts.UseNpgsql(Configuration.GetConnectionString("Default")));
-            services.AddAutoMapper(typeof(Startup));
-
-            services.AddScoped<IStationRepository, StationRepository>();
-            services.AddScoped<IStationService, StationService>();
-
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.Configure<JwtConfig>(Configuration.GetSection("Jwt"));
+            Dependencies.Register(services, Configuration);
+            // Auth
+            Auth.Register(services, Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "LinuxParking.API", Version = "v1" }));
         }
@@ -53,6 +46,7 @@ namespace LinuxParking.API
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }

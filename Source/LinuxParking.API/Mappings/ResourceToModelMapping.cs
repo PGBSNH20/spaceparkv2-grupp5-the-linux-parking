@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using LinuxParking.API.Domain.Models;
 using LinuxParking.API.Domain.Resources;
 
@@ -9,6 +10,7 @@ namespace LinuxParking.API.Mappings
     public ResourceToModelMapping()
     {
       CreateMap<CreateStationResource, Station>();
+      CreateMap<UserRegisterResource, IdentityUser>();
     }
   }
 }
