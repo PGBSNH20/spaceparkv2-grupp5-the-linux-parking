@@ -7,33 +7,33 @@ using LinuxParking.Database.Context;
 
 namespace LinuxParking.Database.Repositories
 {
-  public class StationRepository : BaseRepository, IStationRepository
-  {
-    public StationRepository(AppDbContext ctx) : base(ctx) { }
-
-    public async Task AddAsync(Station station)
+    public class StationRepository : BaseRepository, IStationRepository
     {
-      await _ctx.Stations.AddAsync(station);
-    }
+        public StationRepository(AppDbContext ctx) : base(ctx) { }
 
-    public void Delete(Station station)
-    {
-      _ctx.Stations.Remove(station);
-    }
+        public async Task AddAsync(Station station)
+        {
+            await _ctx.Stations.AddAsync(station).ConfigureAwait(false);
+        }
 
-    public async Task<Station> FindByIdAsync(int id)
-    {
-      return await _ctx.Stations.FindAsync(id);
-    }
+        public void Delete(Station station)
+        {
+            _ctx.Stations.Remove(station);
+        }
 
-    public async Task<IEnumerable<Station>> ListAsync()
-    {
-      return await _ctx.Stations.ToListAsync();
-    }
+        public async Task<Station> FindByIdAsync(int id)
+        {
+            return await _ctx.Stations.FindAsync(id).ConfigureAwait(false);
+        }
 
-    public void Update(Station station)
-    {
-      _ctx.Stations.Update(station);
+        public async Task<IEnumerable<Station>> ListAsync()
+        {
+            return await _ctx.Stations.ToListAsync().ConfigureAwait(false);
+        }
+
+        public void Update(Station station)
+        {
+            _ctx.Stations.Update(station);
+        }
     }
-  }
 }

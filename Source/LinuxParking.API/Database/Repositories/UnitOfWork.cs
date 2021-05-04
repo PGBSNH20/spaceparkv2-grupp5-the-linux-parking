@@ -4,17 +4,17 @@ using LinuxParking.Database.Context;
 
 namespace LinuxParking.Database.Repositories
 {
-  public class UnitOfWork : IUnitOfWork
-  {
-    private readonly AppDbContext _ctx;
+    public class UnitOfWork : IUnitOfWork
+    {
+        private readonly AppDbContext _ctx;
 
-    public UnitOfWork(AppDbContext ctx)
-    {
-      _ctx = ctx;
+        public UnitOfWork(AppDbContext ctx)
+        {
+            _ctx = ctx;
+        }
+        public async Task CompleteAsync()
+        {
+            await _ctx.SaveChangesAsync().ConfigureAwait(false);
+        }
     }
-    public async Task CompleteAsync()
-    {
-      await _ctx.SaveChangesAsync();
-    }
-  }
 }
