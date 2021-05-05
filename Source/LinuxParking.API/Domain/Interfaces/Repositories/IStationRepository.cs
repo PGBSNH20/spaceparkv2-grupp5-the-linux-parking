@@ -4,13 +4,13 @@ using LinuxParking.API.Domain.Models;
 
 namespace LinuxParking.API.Domain.Repositories
 {
-  public interface IStationRepository
-  {
-    Task<IEnumerable<Station>> ListAsync();
+    public interface IStationRepository
+    {
+        Task<IEnumerable<Station>> ListAsync();
 
-    Task AddAsync(Station station);
-    Task<Station> FindByIdAsync(int id);
-    void Update(Station station);
-    void Delete(Station station);
-  }
+        Task AddAsync(Station station);
+        Task<Station> FindByIdAsync(int id);
+        void Update(Station station);
+        void Delete(Station station);
+    }
 }
