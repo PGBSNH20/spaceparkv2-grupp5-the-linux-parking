@@ -4,7 +4,7 @@ using LinuxParking.API.Configuration;
 using LinuxParking.API.Domain.Resources;
 using LinuxParking.API.Domain.Response;
 using LinuxParking.API.Domain.Services;
-using LinuxParking.API.Extentions;
+using LinuxParking.API.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

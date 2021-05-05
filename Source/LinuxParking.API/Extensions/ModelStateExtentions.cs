@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Linq;
-namespace LinuxParking.API.Extentions
+namespace LinuxParking.API.Extensions
 {
     public static class ModelStateExtentions
     {
