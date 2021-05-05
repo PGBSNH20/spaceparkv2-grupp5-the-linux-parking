@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using LinuxParking.API.Domain.Services;
-using LinuxParking.API.Extentions;
+using LinuxParking.API.Extensions;
 using LinuxParking.API.Domain.Resources;
 using LinuxParking.API.Domain.Models;
 namespace LinuxParking.API.Controllers
