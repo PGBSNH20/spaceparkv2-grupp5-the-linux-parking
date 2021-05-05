@@ -44,9 +44,9 @@ namespace LinuxParking.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync([FromRoute] int stationId)
         {
-            var res = await _spotService.ListAsync();
+            var res = await _spotService.ListAsync(stationId);
 
             if (!res.Success)
             {

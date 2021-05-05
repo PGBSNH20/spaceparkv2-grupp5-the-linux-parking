@@ -49,11 +49,11 @@ namespace LinuxParking.API.Services
             return new SpotResponse(spot);
         }
 
-        public async Task<SpotResponse> ListAsync()
+        public async Task<SpotResponse> ListAsync(int stationId)
         {
             try
             {
-                var spots = await _spotRepository.ListAsync();
+                var spots = await _spotRepository.ListAsync(stationId);
 
                 return new SpotResponse(spots);
             }

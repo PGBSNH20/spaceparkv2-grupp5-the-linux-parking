@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using LinuxParking.API.Domain.Models;
 using LinuxParking.Database.Context;
 using LinuxParking.API.Domain.Interfaces.Repositories;
+using System.Linq;
 
 namespace LinuxParking.Database.Repositories
 {
@@ -26,9 +27,9 @@ namespace LinuxParking.Database.Repositories
             return await _ctx.Spots.FirstOrDefaultAsync(spot => spot.StationId == stationId && spot.Id == spotId);
         }
 
-        public async Task<IEnumerable<Spot>> ListAsync()
+        public async Task<IEnumerable<Spot>> ListAsync(int stationId)
         {
-            return await _ctx.Spots.ToListAsync();
+            return await _ctx.Spots.Where(spot => spot.StationId == stationId).ToListAsync();
         }
 
         public void Update(Spot spot)
