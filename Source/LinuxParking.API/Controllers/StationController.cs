@@ -31,7 +31,7 @@ namespace LinuxParking.API.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
 
             var station = _mapper.Map<CreateStationResource, Station>(resource);
-            var res = await _stationService.SaveAsync(station).ConfigureAwait(false);
+            var res = await _stationService.SaveAsync(station);
 
             if (!res.Success)
                 return BadRequest(res.Message);
@@ -43,7 +43,7 @@ namespace LinuxParking.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            var res = await _stationService.ListAsync().ConfigureAwait(false);
+            var res = await _stationService.ListAsync();
 
             if (!res.Success)
                 return BadRequest(res.Message);
@@ -55,7 +55,7 @@ namespace LinuxParking.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync([FromRoute] int id)
         {
-            var res = await _stationService.FindByIdAsync(id).ConfigureAwait(false);
+            var res = await _stationService.FindByIdAsync(id);
 
             if (!res.Success)
                 return BadRequest(res.Message);
@@ -71,7 +71,7 @@ namespace LinuxParking.API.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
 
             var station = _mapper.Map<CreateStationResource, Station>(resource);
-            var res = await _stationService.UpdateAsync(id, station).ConfigureAwait(false);
+            var res = await _stationService.UpdateAsync(id, station);
 
             if (!res.Success)
                 return BadRequest(res.Message);
@@ -83,7 +83,7 @@ namespace LinuxParking.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
-            var res = await _stationService.DeleteAsync(id).ConfigureAwait(false);
+            var res = await _stationService.DeleteAsync(id);
 
             if (!res.Success)
                 return BadRequest(res.Message);

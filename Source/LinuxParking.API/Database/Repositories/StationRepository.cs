@@ -13,7 +13,7 @@ namespace LinuxParking.Database.Repositories
 
         public async Task AddAsync(Station station)
         {
-            await _ctx.Stations.AddAsync(station).ConfigureAwait(false);
+            await _ctx.Stations.AddAsync(station); ;
         }
 
         public void Delete(Station station)
@@ -23,12 +23,12 @@ namespace LinuxParking.Database.Repositories
 
         public async Task<Station> FindByIdAsync(int id)
         {
-            return await _ctx.Stations.FindAsync(id).ConfigureAwait(false);
+            return await _ctx.Stations.FindAsync(id); ;
         }
 
         public async Task<IEnumerable<Station>> ListAsync()
         {
-            return await _ctx.Stations.ToListAsync().ConfigureAwait(false);
+            return await _ctx.Stations.ToListAsync(); ;
         }
 
         public void Update(Station station)

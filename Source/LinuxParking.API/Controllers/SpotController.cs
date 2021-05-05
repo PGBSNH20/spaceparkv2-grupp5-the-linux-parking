@@ -1,16 +1,18 @@
 using System;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using LinuxParking.API.Services;
 
 namespace LinuxParking.API.Controllers
 {
     [Route("/api/station/{stationId}/[controller]")]
     public class SpotController : Controller
     {
-        public SpotController()
+        private readonly ISpotService _spotService;
+
+        public SpotController(ISpotService spotService, )
         {
-            // TODO: Dependecy injections
+            
         }
 
         [HttpPost]
