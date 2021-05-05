@@ -23,7 +23,7 @@ namespace LinuxParking.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody] CreateSpotResource resource)
+        public async Task<IActionResult> CreateAsync([FromRoute] int stationId, [FromBody] CreateSpotResource resource)
         {
             if (!ModelState.IsValid)
             {
@@ -31,6 +31,7 @@ namespace LinuxParking.API.Controllers
             }
 
             var spot = _mapper.Map<CreateSpotResource, Spot>(resource);
+            spot.StationId = stationId;
             var res = await _spotService.SaveAsync(spot);
 
             if (!res.Success)
