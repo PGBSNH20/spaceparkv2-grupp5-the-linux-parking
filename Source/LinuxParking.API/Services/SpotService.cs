@@ -19,12 +19,12 @@ namespace LinuxParking.API.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<SpotResponse> DeleteAsync(int id)
+        public async Task<SpotResponse> DeleteAsync(int stationId, int spotId)
         {
-            var existing = await _spotRepository.FindByIdAsync(id);
+            var existing = await _spotRepository.FindByIdAsync(stationId, spotId);
 
             if (existing == null)
-                return new SpotResponse($"Spot with {id} not found.");
+                return new SpotResponse($"Spot with {spotId} not found.");
 
             try
             {
@@ -35,16 +35,16 @@ namespace LinuxParking.API.Services
             }
             catch (Exception ex)
             {
-                return new SpotResponse($"Error - Failed to delete spot with id {id}: {ex.Message}");
+                return new SpotResponse($"Error - Failed to delete spot with id {spotId}: {ex.Message}");
             }
         }
 
-        public async Task<SpotResponse> FindByIdAsync(int id)
+        public async Task<SpotResponse> FindByIdAsync(int stationId, int spotId)
         {
-            var spot = await _spotRepository.FindByIdAsync(id);
+            var spot = await _spotRepository.FindByIdAsync(stationId, spotId);
 
             if (spot == null)
-                return new SpotResponse($"Spot with id {id} not found");
+                return new SpotResponse($"Spot with id {spotId} not found");
 
             return new SpotResponse(spot);
         }
@@ -78,12 +78,12 @@ namespace LinuxParking.API.Services
             }
         }
 
-        public async Task<SpotResponse> UpdateAsync(int id, Spot spot)
+        public async Task<SpotResponse> UpdateAsync(int stationId, int spotId, Spot spot)
         {
-            var existing = await _spotRepository.FindByIdAsync(id);
+            var existing = await _spotRepository.FindByIdAsync(stationId, spotId);
 
             if (existing == null)
-                return new SpotResponse($"Spot with {id} not found.");
+                return new SpotResponse($"Spot with {spotId} not found.");
 
             existing.Price = spot.Price;
             existing.Size = spot.Size;
@@ -97,7 +97,7 @@ namespace LinuxParking.API.Services
             }
             catch (Exception ex)
             {
-                return new SpotResponse($"Failed to update spot with id: {id}, with error: ${ex.Message}");
+                return new SpotResponse($"Failed to update spot with id: {spotId}, with error: ${ex.Message}");
             }
         }
     }

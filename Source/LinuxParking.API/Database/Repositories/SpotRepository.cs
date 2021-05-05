@@ -21,9 +21,9 @@ namespace LinuxParking.Database.Repositories
             _ctx.Spots.Remove(spot);
         }
 
-        public async Task<Spot> FindByIdAsync(int id)
+        public async Task<Spot> FindByIdAsync(int stationId, int spotId)
         {
-            return await _ctx.Spots.FindAsync(id);
+            return await _ctx.Spots.FirstOrDefaultAsync(spot => spot.StationId == stationId && spot.Id == spotId);
         }
 
         public async Task<IEnumerable<Spot>> ListAsync()

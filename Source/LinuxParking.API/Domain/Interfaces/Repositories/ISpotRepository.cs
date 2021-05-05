@@ -8,7 +8,7 @@ namespace LinuxParking.API.Domain.Interfaces.Repositories
     {
         Task<IEnumerable<Spot>> ListAsync();
         Task AddAsync(Spot spot);
-        Task<Spot> FindByIdAsync(int id);
+        Task<Spot> FindByIdAsync(int stationId, int spotId);
         void Update(Spot spot);
         void Delete(Spot spot);
     }

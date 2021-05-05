@@ -58,7 +58,7 @@ namespace LinuxParking.API.Controllers
 
         [HttpGet]
         [Route("{spotId}")]
-        public async Task<IActionResult> GetAsync([FromRoute] string stationId, [FromRoute] string spotId)
+        public async Task<IActionResult> GetAsync([FromRoute] int stationId, [FromRoute] int spotId)
         {
             var res = await _spotService.FindByIdAsync(stationId, spotId);
             if (!res.Success)
@@ -72,7 +72,7 @@ namespace LinuxParking.API.Controllers
 
         [HttpPut]
         [Route("{spotId}")]
-        public async Task<IActionResult> UpdateAsync(string id, [FromBody] CreateSpotResource resource)
+        public async Task<IActionResult> UpdateAsync(int stationId, int spotId, [FromBody] CreateSpotResource resource)
         {
             if (!ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace LinuxParking.API.Controllers
             }
 
             var spot = _mapper.Map<CreateSpotResource, Spot>(resource);
-            var res = await _spotService.UpdateAsync(id, spot);
+            var res = await _spotService.UpdateAsync(stationId, spotId, spot);
 
             if (!res.Success)
             {
@@ -93,9 +93,9 @@ namespace LinuxParking.API.Controllers
 
         [HttpDelete]
         [Route("{spotId}")]
-        public async Task<IActionResult> DeleteAsync([FromRoute] string spotId)
+        public async Task<IActionResult> DeleteAsync(int stationId, [FromRoute] int spotId)
         {
-            var res = await _spotService.DeleteAsync(spotId);
+            var res = await _spotService.DeleteAsync(stationId, spotId);
 
             if (!res.Success)
                 return BadRequest(res.Message);

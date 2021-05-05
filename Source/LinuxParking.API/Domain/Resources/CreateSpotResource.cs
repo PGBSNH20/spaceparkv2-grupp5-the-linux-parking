@@ -6,5 +6,9 @@ namespace LinuxParking.API.Domain.Resources
     {
         [Required]
         public int Id { get; set; }
+        [Required]
+        public int Size { get; set; }
+        [Required]
+        public decimal Price { get; set; }
     }
 }
