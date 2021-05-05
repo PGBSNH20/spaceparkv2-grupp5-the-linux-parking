@@ -1,13 +1,14 @@
 using System;
 using System.Threading.Tasks;
 using LinuxParking.API.Domain.Interfaces.Repositories;
+using LinuxParking.API.Domain.Interfaces.Services;
 using LinuxParking.API.Domain.Models;
 using LinuxParking.API.Domain.Repositories;
 using LinuxParking.API.Domain.Response;
 
 namespace LinuxParking.API.Services
 {
-    public class SpotService
+    public class SpotService : ISpotService
     {
         private readonly ISpotRepository _spotRepository;
         private readonly IUnitOfWork _unitOfWork;

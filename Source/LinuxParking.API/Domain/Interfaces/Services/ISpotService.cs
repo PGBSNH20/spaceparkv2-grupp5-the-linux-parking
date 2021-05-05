@@ -7,9 +7,9 @@ namespace LinuxParking.API.Domain.Interfaces.Services
     public interface ISpotService
     {
         Task<SpotResponse> ListAsync();
-        Task<SpotResponse> FindByIdAsync(int id);
+        Task<SpotResponse> FindByIdAsync(string stationId, string spotId);
         Task<SpotResponse> SaveAsync(Spot spot);
-        Task<SpotResponse> UpdateAsync(int id, Spot spot);
-        Task<SpotResponse> DeleteAsync(int id);
+        Task<SpotResponse> UpdateAsync(string id, Spot spot);
+        Task<SpotResponse> DeleteAsync(string id);
     }
 }
