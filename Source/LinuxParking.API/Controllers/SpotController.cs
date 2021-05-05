@@ -1,12 +1,11 @@
-using System;
 using AutoMapper;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using LinuxParking.API.Extentions;
 using LinuxParking.API.Domain.Resources;
 using LinuxParking.API.Domain.Interfaces.Services;
 using LinuxParking.API.Domain.Models;
 using System.Collections.Generic;
+using LinuxParking.API.Extensions;
 
 namespace LinuxParking.API.Controllers
 {
