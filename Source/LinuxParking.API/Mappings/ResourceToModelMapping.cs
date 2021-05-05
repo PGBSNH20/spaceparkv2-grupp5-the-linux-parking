@@ -10,6 +10,7 @@ namespace LinuxParking.API.Mappings
         public ResourceToModelMapping()
         {
             CreateMap<CreateStationResource, Station>();
+            CreateMap<CreateSpotResource, Spot>();
             CreateMap<AuthResource, IdentityUser>();
         }
     }

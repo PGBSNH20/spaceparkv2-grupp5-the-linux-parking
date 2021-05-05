@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using LinuxParking.API.Domain.Models;
 using LinuxParking.API.Domain.Response;

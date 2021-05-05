@@ -14,7 +14,7 @@ namespace LinuxParking.Database.Repositories
         }
         public async Task CompleteAsync()
         {
-            await _ctx.SaveChangesAsync().ConfigureAwait(false);
+            await _ctx.SaveChangesAsync(); ;
         }
     }
 }
