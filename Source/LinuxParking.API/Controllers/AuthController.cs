@@ -28,6 +28,7 @@ namespace LinuxParking.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
+            resource.ParseName();
             var user = _mapper.Map<AuthResource, IdentityUser>(resource);
 
             var res = await _authService.RegisterAsync(user, resource.Password);
@@ -42,6 +43,8 @@ namespace LinuxParking.API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
+
+            resource.ParseName();
 
             var user = _mapper.Map<AuthResource, IdentityUser>(resource);
 
