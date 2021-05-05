@@ -7,5 +7,6 @@ namespace LinuxParking.API.Domain.Services
     public interface IAuthService
     {
         Task<AuthResponse> RegisterAsync(IdentityUser user, string password);
+        Task<AuthResponse> LoginAsync(IdentityUser user, string password);
     }
 }
