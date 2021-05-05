@@ -4,7 +4,7 @@ using LinuxParking.API.Configuration;
 using LinuxParking.API.Domain.Resources;
 using LinuxParking.API.Domain.Response;
 using LinuxParking.API.Domain.Services;
-using LinuxParking.API.Extentions;
+using LinuxParking.API.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +28,7 @@ namespace LinuxParking.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
+            resource.ParseName();
             var user = _mapper.Map<AuthResource, IdentityUser>(resource);
 
             var res = await _authService.RegisterAsync(user, resource.Password);
@@ -42,6 +43,8 @@ namespace LinuxParking.API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
+
+            resource.ParseName();
 
             var user = _mapper.Map<AuthResource, IdentityUser>(resource);
 
