@@ -5,10 +5,10 @@ namespace LinuxParking.API.Domain.Resources
     public class CreateSpotResource
     {
         [Required]
-        [MinLength(1)]
+        [Range(1, int.MaxValue)]
         public int Size { get; set; }
         [Required]
-        [MinLength(1)]
+        [Range(0.1, double.MaxValue)]
         public decimal Price { get; set; }
     }
 }
