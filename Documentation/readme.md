@@ -4,7 +4,11 @@
 
 ### Endpoints
   - `/api` - base endpoint
-#### Station
+#### Auth
+##### POST
+  -  `/auth/login` - Login with an existing user.
+  -  `/auth/register` - Register a new user, that exists within swapi.
+#### Station - Requiers authentication
 ##### POST
   - `/station` - Create new station
 ##### GET
@@ -14,7 +18,7 @@
   - `/station/{id}` - Update station with {id}
 ##### DELETE
   - `/station/{id}` - Delete station with {id}
-#### Spot
+#### Spot - Requiers authentication
 ##### POST
   - `/station/{id}/spot` - Create new spot at station {id}
 ##### GET
@@ -24,4 +28,14 @@
   - `/station/{id}/spot/{sid}` - Update spot with {sid} at station {id}
 ##### DELETE
   - `/station/{id}/spot/{sid}` - Delete spot with {sid} at statio {id}
+
+#### Parking - Requires authentication
+##### POST
+  - `/station/{id}/spot/{sid}/parking` - Park at this spot.
+##### GET
+  - `/station/{id}/spot/{sid}/parking` - Get whos parked on this spot.
+  - `/station/{id}/parking` - Get all spots and their parking status.
+##### DELETE
+  - `/station/{id}/spot/{sid}/parking` - Delete customer from parking/unpark.
+
 ### Project
