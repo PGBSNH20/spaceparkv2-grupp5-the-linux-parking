@@ -11,7 +11,8 @@ namespace LinuxParking.API.Domain.Resources
         [Required]
         public string Password { get; set; }
 
-        public void ParseName() {
+        public void ParseName()
+        {
             Username = Regex.Replace(Username, @"\b \b", "");
         }
     }
