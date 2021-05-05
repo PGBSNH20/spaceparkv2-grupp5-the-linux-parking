@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace LinuxParking.API.Mappings
 {
-  public class ModelToResourceMapper : Profile
-  {
-    public ModelToResourceMapper()
+    public class ModelToResourceMapper : Profile
     {
-      CreateMap<Station, StationResource>();
-      CreateMap<IdentityUser, UserRegisterResource>();
+        public ModelToResourceMapper()
+        {
+            CreateMap<Station, StationResource>();
+            CreateMap<IdentityUser, AuthResource>();
+        }
     }
-  }
 }

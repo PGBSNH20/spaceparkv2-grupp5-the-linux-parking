@@ -11,7 +11,9 @@ namespace LinuxParking.API.Configuration
 {
     public static class Dependencies
     {
-        public static void Register(IServiceCollection services, IConfiguration configuration) {
+        public static void Register(IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<JwtConfig>(configuration.GetSection("Jwt"));
             services.AddDbContext<AppDbContext>(opts => opts.UseNpgsql(configuration.GetConnectionString("Default")));
             services.AddAutoMapper(typeof(Startup));
 

@@ -11,39 +11,38 @@ using System.Collections.Generic;
 
 namespace LinuxParking.API
 {
-  public class Startup
-  {
-    public Startup(IConfiguration configuration)
+    public class Startup
     {
-      Configuration = configuration;
-    }
-
-    public IConfiguration Configuration { get; }
-
-    // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices(IServiceCollection services)
-    {
-      services.Configure<JwtConfig>(Configuration.GetSection("Jwt"));
-      Dependencies.Register(services, Configuration);
-      // Auth
-      Auth.Register(services, Configuration);
-      services.AddControllers();
-      services.AddSwaggerGen(c =>
-      {
-        c.SwaggerDoc("v1", new OpenApiInfo { Title = "LinuxParking.API", Version = "v1" });
-        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        public Startup(IConfiguration configuration)
         {
-          Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            Dependencies.Register(services, Configuration);
+            // Auth
+            Auth.Register(services, Configuration);
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LinuxParking.API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
                       Enter 'Bearer' [space] and then your token in the text input below.
                       \r\n\r\nExample: 'Bearer 12345abcdef'",
-          Name = "Authorization",
-          In = ParameterLocation.Header,
-          Type = SecuritySchemeType.ApiKey,
-          Scheme = "Bearer"
-        });
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
 
-        c.AddSecurityRequirement(new OpenApiSecurityRequirement()
-      {
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            {
         {
           new OpenApiSecurityScheme
           {
@@ -59,29 +58,29 @@ namespace LinuxParking.API
             },
             new List<string>()
           }
-        });
-      });
+              });
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LinuxParking.API v1"));
+            }
+
+            if (env.IsProduction())
+                app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+            app.UseAuthentication();
+
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
+        }
     }
-
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-      if (env.IsDevelopment())
-      {
-        app.UseDeveloperExceptionPage();
-        app.UseSwagger();
-        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LinuxParking.API v1"));
-      }
-
-      if (env.IsProduction())
-        app.UseHttpsRedirection();
-
-      app.UseRouting();
-
-      app.UseAuthorization();
-      app.UseAuthentication();
-
-      app.UseEndpoints(endpoints => endpoints.MapControllers());
-    }
-  }
 }

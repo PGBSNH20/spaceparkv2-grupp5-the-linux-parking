@@ -5,12 +5,12 @@ using LinuxParking.API.Domain.Resources;
 
 namespace LinuxParking.API.Mappings
 {
-  public class ResourceToModelMapping : Profile
-  {
-    public ResourceToModelMapping()
+    public class ResourceToModelMapping : Profile
     {
-      CreateMap<CreateStationResource, Station>();
-      CreateMap<UserRegisterResource, IdentityUser>();
+        public ResourceToModelMapping()
+        {
+            CreateMap<CreateStationResource, Station>();
+            CreateMap<AuthResource, IdentityUser>();
+        }
     }
-  }
 }
