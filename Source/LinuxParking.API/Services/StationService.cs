@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using LinuxParking.API.Domain.Models;
 using LinuxParking.API.Domain.Repositories;
@@ -53,6 +54,9 @@ namespace LinuxParking.API.Services
             try
             {
                 var stations = await _stationRepository.ListAsync().ConfigureAwait(false);
+
+                if (!stations.Any())
+                    return new StationResponse("No stations found");
 
                 return new StationResponse(stations);
             }

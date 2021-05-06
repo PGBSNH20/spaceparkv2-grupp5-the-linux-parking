@@ -89,7 +89,7 @@ namespace LinuxParking.API.Controllers
                 return BadRequest(res.Message);
 
             var stationResource = _mapper.Map<Station, StationResource>(res.Station);
-            return Ok(stationResource);
+            return NotFound(stationResource);
         }
     }
 }
