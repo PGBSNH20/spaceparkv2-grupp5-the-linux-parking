@@ -19,6 +19,8 @@ namespace LinuxParking.API.Domain.Models
         [ForeignKey("SpotID")]
         public virtual Spot Spot { get; set; }
 
+        public int StationId { get; set; }
+
         public ParkingStatus() { }
         public ParkingStatus(DateTime arrivalTime, int customerID, int spotID)
         {

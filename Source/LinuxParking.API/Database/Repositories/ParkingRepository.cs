@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LinuxParking.API.Domain.Interfaces.Repositories;
 using LinuxParking.API.Domain.Models;
 using LinuxParking.Database.Context;
 using LinuxParking.Database.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace LinuxParking.API.Database.Repositories
 {
@@ -11,29 +13,30 @@ namespace LinuxParking.API.Database.Repositories
     {
         public ParkingRepository(AppDbContext ctx) : base(ctx) { }
 
-        public Task AddAsync(ParkingStatus parking)
+
+        public async Task AddAsync(ParkingStatus parking)
         {
-            throw new System.NotImplementedException();
+            await _ctx.ParkingStatuses.AddAsync(parking);
         }
 
         public void Delete(ParkingStatus parking)
         {
-            throw new System.NotImplementedException();
+            _ctx.ParkingStatuses.Remove(parking);
         }
 
-        public Task<ParkingStatus> FindByIdAsync(int stationId, int parkingId)
+        public async Task<ParkingStatus> FindByIdAsync(int stationId, int parkingId)
         {
-            throw new System.NotImplementedException();
+            return await _ctx.ParkingStatuses.FirstOrDefaultAsync(parking => parking.StationId == stationId && parking.Id == parkingId);
         }
 
-        public Task<IEnumerable<ParkingStatus>> ListAsync(int stationId)
+        public async Task<IEnumerable<ParkingStatus>> ListAsync(int stationId)
         {
-            throw new System.NotImplementedException();
+            return await _ctx.ParkingStatuses.Where(parking => parking.StationId == stationId).ToListAsync();
         }
 
         public void Update(ParkingStatus parking)
         {
-            throw new System.NotImplementedException();
+            _ctx.ParkingStatuses.Update(parking);
         }
     }
 }
