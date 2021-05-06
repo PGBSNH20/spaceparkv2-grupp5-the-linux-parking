@@ -7,7 +7,7 @@ namespace LinuxParking.API.Domain.Models
     public class ParkingStatus
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required]
         public DateTime ArrivalTime { get; set; }
         public int CustomerID { get; set; }
