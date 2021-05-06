@@ -1,3 +1,4 @@
+using LinuxParking.API.Database.Repositories;
 using LinuxParking.API.Domain.Interfaces.Repositories;
 using LinuxParking.API.Domain.Interfaces.Services;
 using LinuxParking.API.Domain.Repositories;
@@ -23,6 +24,8 @@ namespace LinuxParking.API.Configuration
             services.AddScoped<IStationService, StationService>();
             services.AddScoped<ISpotRepository, SpotRepository>();
             services.AddScoped<ISpotService, SpotService>();
+            services.AddScoped<IParkingRepository, ParkingRepository>();
+            services.AddScoped<IParkingService, ParkingService>();
             services.AddScoped<IAuthService, AuthService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

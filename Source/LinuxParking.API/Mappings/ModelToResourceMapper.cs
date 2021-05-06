@@ -11,6 +11,7 @@ namespace LinuxParking.API.Mappings
         {
             CreateMap<Station, StationResource>();
             CreateMap<Spot, SpotResource>();
+            CreateMap<ParkingStatus, ParkingResource>();
             CreateMap<IdentityUser, AuthResource>();
         }
     }
