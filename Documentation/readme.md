@@ -39,3 +39,32 @@
   - `/station/{id}/spot/{sid}/parking` - Delete customer from parking/unpark.
 
 ### Project
+```
+├── Documentation
+└── Source
+    ├── LinuxParking.API
+    │   ├── Configuration - Application configuration such as JWT, Swagger, Dependecy injections.
+    │   ├── Controllers - API Controllers
+    │   ├── Database - Database management, repositories
+    │   ├── Domain - Models, Resources, Response .
+    │   ├── Extensions - Extentions of classes and objects.
+    │   ├── External - 3rd-party resources.
+    │   ├── Mappings - Mapping configuration.
+    │   ├── Migrations - Database migrations.
+    │   ├── Services - Internal services.
+    │   └── Utils - Utils such as JWT generation and parsing.
+    ├── LinuxParking.API.Test
+    └── docker-compose.yml
+```
+
+#### Packages & Dependencies used
+##### API
+- AutoMapper - Mapping between models/objects.
+- AspNetCore.Authentication.JwtBearer - JWT token management.
+- AspNetCore.Identity - Authentication management helper.
+- EntityFrameWorkCore - Database management | Code first
+- RestSharp - Utilize rest api's.
+- Npgsql - PostgreSQL support.
+
+##### Test
+- xUnit - UnitTesting package.
