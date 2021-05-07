@@ -87,6 +87,7 @@ namespace LinuxParking.API.Services
                 return new ParkingResponse($"Parking with id {parkingId} not found.");
 
             existing.CustomerID = parking.CustomerID;
+            existing.SpotID = parking.SpotID;
             existing.ArrivalTime = DateTime.Now;
 
             try
