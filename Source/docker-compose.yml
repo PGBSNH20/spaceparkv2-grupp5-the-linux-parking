@@ -3,6 +3,7 @@ version: '3'
 services:
   db:
     image: postgres:13.2
+    container_name: linuxpark
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=secret

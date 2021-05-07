@@ -5,8 +5,8 @@ namespace LinuxParking.API.Domain.Resources
     public class CreateParkingResource
     {
         [Required]
-        public int CustomerId;
+        public int CustomerId { get; set; }
         [Required]
-        public int ParkingId;
+        public int SpotId { get; set; }
     }
 }
