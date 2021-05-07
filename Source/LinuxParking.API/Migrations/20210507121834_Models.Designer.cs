@@ -3,21 +3,38 @@ using System;
 using LinuxParking.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LinuxParking.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210507121834_Models")]
+    partial class Models
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("LinuxParking.API.Domain.Models.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customer");
+                });
 
             modelBuilder.Entity("LinuxParking.API.Domain.Models.ParkingStatus", b =>
                 {
@@ -29,8 +46,8 @@ namespace LinuxParking.API.Migrations
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("CustomerID")
-                        .HasColumnType("text");
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("integer");
 
                     b.Property<int>("SpotID")
                         .HasColumnType("integer");
@@ -39,6 +56,8 @@ namespace LinuxParking.API.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerID");
 
                     b.HasIndex("SpotID");
 
@@ -284,11 +303,19 @@ namespace LinuxParking.API.Migrations
 
             modelBuilder.Entity("LinuxParking.API.Domain.Models.ParkingStatus", b =>
                 {
+                    b.HasOne("LinuxParking.API.Domain.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LinuxParking.API.Domain.Models.Spot", "Spot")
                         .WithMany()
                         .HasForeignKey("SpotID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Customer");
 
                     b.Navigation("Spot");
                 });
