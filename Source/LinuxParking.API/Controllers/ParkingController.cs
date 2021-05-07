@@ -34,7 +34,7 @@ namespace LinuxParking.API.Controllers
 
             var parking = _mapper.Map<CreateParkingResource, ParkingStatus>(resource);
 
-            parking.CustomerID = HttpContext.User.FindFirst(ClaimTypes.Authentication)?.Value;
+            parking.CustomerID = HttpContext.User.Claims.First(h => h.Type == "Id").Value;
             parking.StationId = stationId;
             var res = await _parkingService.SaveAsync(parking);
 
