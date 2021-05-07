@@ -25,9 +25,6 @@ namespace LinuxParking.Database.Context
             builder.Entity<ParkingStatus>().HasKey(p => p.Id);
             builder.Entity<ParkingStatus>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
 
-            builder.Entity<Customer>().HasKey(p => p.Id);
-            builder.Entity<Customer>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-
             builder.Entity<Spot>().HasKey(p => p.Id);
             builder.Entity<Spot>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Spot>().Property(p => p.Price).IsRequired();

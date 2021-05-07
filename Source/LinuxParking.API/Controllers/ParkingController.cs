@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using LinuxParking.API.Domain.Interfaces.Services;
 using LinuxParking.API.Domain.Models;
 using LinuxParking.API.Domain.Resources;
 using LinuxParking.API.Extensions;
+using LinuxParking.API.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinuxParking.API.Controllers
@@ -30,6 +33,8 @@ namespace LinuxParking.API.Controllers
             }
 
             var parking = _mapper.Map<CreateParkingResource, ParkingStatus>(resource);
+
+            parking.CustomerID = HttpContext.User.FindFirst(ClaimTypes.Authentication)?.Value;
             parking.StationId = stationId;
             var res = await _parkingService.SaveAsync(parking);
 
@@ -56,10 +61,10 @@ namespace LinuxParking.API.Controllers
             return Ok(parkingResponse);
         }
 
-        [HttpGet("{parkingId}")]
-        public async Task<IActionResult> GetAsync([FromRoute] int stationId, [FromRoute] int parkingId)
+        [HttpGet("{spotId}")]
+        public async Task<IActionResult> GetAsync([FromRoute] int stationId, [FromRoute] int spotId)
         {
-            var res = await _parkingService.FindByIdAsync(stationId, parkingId);
+            var res = await _parkingService.FindByIdAsync(stationId, spotId);
             if (!res.Success)
             {
                 return BadRequest(res.Message);
@@ -69,8 +74,8 @@ namespace LinuxParking.API.Controllers
             return Ok(parkingResponse);
         }
 
-        [HttpPut("{parkingId}")]
-        public async Task<IActionResult> UpdateAsync(int stationId, int parkingId, [FromBody] CreateParkingResource resource)
+        [HttpPut("{spotId}")]
+        public async Task<IActionResult> UpdateAsync(int stationId, int spotId, [FromBody] CreateParkingResource resource)
         {
             if (!ModelState.IsValid)
             {
@@ -78,7 +83,7 @@ namespace LinuxParking.API.Controllers
             }
 
             var parking = _mapper.Map<CreateParkingResource, ParkingStatus>(resource);
-            var res = await _parkingService.UpdateAsync(stationId, parkingId, parking);
+            var res = await _parkingService.UpdateAsync(stationId, spotId, parking);
 
             if (!res.Success)
             {
@@ -89,10 +94,10 @@ namespace LinuxParking.API.Controllers
             return Ok(parkingResponse);
         }
 
-        [HttpDelete("{parkingId}")]
-        public async Task<IActionResult> DeleteAsync(int stationId, [FromRoute] int parkingId)
+        [HttpDelete("{spotId}")]
+        public async Task<IActionResult> DeleteAsync(int stationId, [FromRoute] int spotId)
         {
-            var res = await _parkingService.DeleteAsync(stationId, parkingId);
+            var res = await _parkingService.DeleteAsync(stationId, spotId);
 
             if (!res.Success)
                 return BadRequest(res.Message);

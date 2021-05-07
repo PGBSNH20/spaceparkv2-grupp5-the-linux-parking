@@ -10,10 +10,8 @@ namespace LinuxParking.API.Domain.Models
         public int Id { get; set; }
         [Required]
         public DateTime ArrivalTime { get; set; }
-        public int CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
-        [ForeignKey("CustomerID")]
-        public virtual Customer Customer { get; set; }
         public int SpotID { get; set; }
 
         [ForeignKey("SpotID")]
@@ -22,7 +20,7 @@ namespace LinuxParking.API.Domain.Models
         public int StationId { get; set; }
 
         public ParkingStatus() { }
-        public ParkingStatus(DateTime arrivalTime, int customerID, int spotID)
+        public ParkingStatus(DateTime arrivalTime, string customerID, int spotID)
         {
             ArrivalTime = arrivalTime;
             CustomerID = customerID;
