@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -35,7 +36,10 @@ namespace LinuxParking.API.Controllers
             var parking = _mapper.Map<CreateParkingResource, ParkingStatus>(resource);
 
             parking.CustomerID = HttpContext.User.Claims.First(h => h.Type == "Id").Value;
+            parking.ArrivalTime = DateTime.Now;
+            parking.SpotID = resource.SpotId;
             parking.StationId = stationId;
+
             var res = await _parkingService.SaveAsync(parking);
 
             if (!res.Success)
