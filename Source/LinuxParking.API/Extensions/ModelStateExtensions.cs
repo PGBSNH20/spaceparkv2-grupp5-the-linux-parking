@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Linq;
 namespace LinuxParking.API.Extensions
 {
-    public static class ModelStateExtentions
+    public static class ModelStateExtensions
     {
         public static List<string> GetErrorMessages(this ModelStateDictionary dict)
         {
