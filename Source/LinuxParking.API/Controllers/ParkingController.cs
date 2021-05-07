@@ -69,8 +69,7 @@ namespace LinuxParking.API.Controllers
             return Ok(parkingResponse);
         }
 
-        [HttpPut]
-        [Route("{parkingId}")]
+        [HttpPut("{parkingId}")]
         public async Task<IActionResult> UpdateAsync(int stationId, int parkingId, [FromBody] CreateParkingResource resource)
         {
             if (!ModelState.IsValid)
@@ -90,8 +89,7 @@ namespace LinuxParking.API.Controllers
             return Ok(parkingResponse);
         }
 
-        [HttpDelete]
-        [Route("{parkingId}")]
+        [HttpDelete("{parkingId}")]
         public async Task<IActionResult> DeleteAsync(int stationId, [FromRoute] int parkingId)
         {
             var res = await _parkingService.DeleteAsync(stationId, parkingId);
