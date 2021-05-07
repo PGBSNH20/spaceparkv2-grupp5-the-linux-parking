@@ -4,6 +4,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Linq;
 
 namespace LinuxParking.API.Utils
 {
@@ -30,6 +31,15 @@ namespace LinuxParking.API.Utils
 
             var token = jwtTokenHandler.CreateToken(descriptor);
             return jwtTokenHandler.WriteToken(token);
+        }
+
+        public static string GetClaims(string token, string type)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var securityToken = handler.ReadToken(token) as JwtSecurityToken;
+
+            var value = securityToken.Claims.First(c => c.Type == type).Value;
+            return value;
         }
     }
 }
