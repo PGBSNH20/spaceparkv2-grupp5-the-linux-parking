@@ -56,8 +56,7 @@ namespace LinuxParking.API.Controllers
             return Ok(parkingResponse);
         }
 
-        [HttpGet]
-        [Route("{parkingId}")]
+        [HttpGet("{parkingId}")]
         public async Task<IActionResult> GetAsync([FromRoute] int stationId, [FromRoute] int parkingId)
         {
             var res = await _parkingService.FindByIdAsync(stationId, parkingId);
