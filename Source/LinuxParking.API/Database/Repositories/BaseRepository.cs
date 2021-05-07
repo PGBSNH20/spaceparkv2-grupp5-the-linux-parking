@@ -1,6 +1,6 @@
-using LinuxParking.Database.Context;
+using LinuxParking.API.Database.Context;
 
-namespace LinuxParking.Database.Repositories
+namespace LinuxParking.API.Database.Repositories
 {
     public abstract class BaseRepository
     {

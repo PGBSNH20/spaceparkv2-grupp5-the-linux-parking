@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using LinuxParking.API.Database.Context;
 using LinuxParking.API.Domain.Models;
 using LinuxParking.API.Domain.Repositories;
-using LinuxParking.Database.Context;
+using Microsoft.EntityFrameworkCore;
 
-namespace LinuxParking.Database.Repositories
+namespace LinuxParking.API.Database.Repositories
 {
     public class StationRepository : BaseRepository, IStationRepository
     {

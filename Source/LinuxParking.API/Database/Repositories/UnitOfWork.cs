@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
+using LinuxParking.API.Database.Context;
 using LinuxParking.API.Domain.Repositories;
-using LinuxParking.Database.Context;
 
-namespace LinuxParking.Database.Repositories
+namespace LinuxParking.API.Database.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

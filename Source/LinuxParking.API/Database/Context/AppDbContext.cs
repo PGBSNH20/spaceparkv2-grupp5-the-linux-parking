@@ -1,8 +1,8 @@
-using Microsoft.EntityFrameworkCore;
 using LinuxParking.API.Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
-namespace LinuxParking.Database.Context
+namespace LinuxParking.API.Database.Context
 {
     public class AppDbContext : IdentityDbContext
     {

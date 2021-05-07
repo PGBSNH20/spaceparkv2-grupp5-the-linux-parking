@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using LinuxParking.API.Domain.Models;
-using LinuxParking.Database.Context;
-using LinuxParking.API.Domain.Interfaces.Repositories;
 using System.Linq;
+using System.Threading.Tasks;
+using LinuxParking.API.Database.Context;
+using LinuxParking.API.Domain.Interfaces.Repositories;
+using LinuxParking.API.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace LinuxParking.Database.Repositories
+namespace LinuxParking.API.Database.Repositories
 {
     public class SpotRepository : BaseRepository, ISpotRepository
     {

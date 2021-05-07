@@ -1,9 +1,9 @@
 using System.Text;
+using LinuxParking.API.Database.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using LinuxParking.Database.Context;
 using Microsoft.AspNetCore.Identity;
 
 namespace LinuxParking.API.Configuration
