@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LinuxParking.API.Controllers
 {
-    [Route("/api/parking/{stationId}/[controller]")]
+    [Route("/api/station/{stationId}/spot/{spotId}/[controller]")]
     public class ParkingController : Controller
     {
         private readonly IParkingService _parkingService;
@@ -26,7 +26,7 @@ namespace LinuxParking.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromRoute] int stationId, [FromBody] CreateParkingResource resource)
+        public async Task<IActionResult> CreateAsync([FromRoute] int stationId, [FromRoute] int spotId, [FromBody] CreateParkingResource resource)
         {
             if (!ModelState.IsValid)
             {
@@ -37,7 +37,7 @@ namespace LinuxParking.API.Controllers
 
             parking.CustomerID = HttpContext.User.Claims.First(h => h.Type == "Id").Value;
             parking.ArrivalTime = DateTime.Now;
-            parking.SpotID = resource.SpotId;
+            parking.SpotID = spotId;
             parking.StationId = stationId;
 
             var res = await _parkingService.SaveAsync(parking);
@@ -51,21 +51,8 @@ namespace LinuxParking.API.Controllers
             return Created("", parkingResource);
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync([FromRoute] int stationId)
-        {
-            var res = await _parkingService.ListAsync(stationId);
-
-            if (!res.Success)
-            {
-                return BadRequest(res.Message);
-            }
-
-            var parkingResponse = _mapper.Map<IEnumerable<ParkingStatus>, IEnumerable<ParkingResource>>(res.ParkingStatuses);
-            return Ok(parkingResponse);
-        }
-
-        [HttpGet("{spotId}")]
         public async Task<IActionResult> GetAsync([FromRoute] int stationId, [FromRoute] int spotId)
         {
             var res = await _parkingService.FindByIdAsync(stationId, spotId);
@@ -78,27 +65,7 @@ namespace LinuxParking.API.Controllers
             return Ok(parkingResponse);
         }
 
-        [HttpPut("{spotId}")]
-        public async Task<IActionResult> UpdateAsync(int stationId, int spotId, [FromBody] CreateParkingResource resource)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState.GetErrorMessages());
-            }
-
-            var parking = _mapper.Map<CreateParkingResource, ParkingStatus>(resource);
-            var res = await _parkingService.UpdateAsync(stationId, spotId, parking);
-
-            if (!res.Success)
-            {
-                return BadRequest(res.Message);
-            }
-
-            var parkingResponse = _mapper.Map<ParkingStatus, ParkingResource>(res.ParkingStatus);
-            return Ok(parkingResponse);
-        }
-
-        [HttpDelete("{spotId}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteAsync(int stationId, [FromRoute] int spotId)
         {
             var res = await _parkingService.DeleteAsync(stationId, spotId);

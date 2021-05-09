@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using System.Threading.Tasks;
+using LinuxParking.API.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,12 +16,14 @@ namespace LinuxParking.API.Controllers
     public class StationController : Controller
     {
         private readonly IStationService _stationService;
+        private readonly IParkingService _parkingService;
 
         private readonly IMapper _mapper;
 
-        public StationController(IStationService stationService, IMapper mapper)
+        public StationController(IStationService stationService, IParkingService parkingService, IMapper mapper)
         {
             _stationService = stationService;
+            _parkingService = parkingService;
             _mapper = mapper;
         }
 
@@ -62,6 +65,20 @@ namespace LinuxParking.API.Controllers
 
             var stationResponse = _mapper.Map<Station, StationResource>(res.Station);
             return Ok(stationResponse);
+        }
+
+        [HttpGet("{id}/parking")]
+        public async Task<IActionResult> GetAllAsync([FromRoute] int id)
+        {
+            var res = await _parkingService.ListAsync(id);
+
+            if (!res.Success)
+            {
+                return BadRequest(res.Message);
+            }
+
+            var parkingResponse = _mapper.Map<IEnumerable<ParkingStatus>, IEnumerable<ParkingResource>>(res.ParkingStatuses);
+            return Ok(parkingResponse);
         }
 
         [HttpPut("{id}")]
